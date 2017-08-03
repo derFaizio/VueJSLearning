@@ -2,12 +2,12 @@
   <div id="app">
     <div>
       <img src="./assets/logo.png">
-      <router-view></router-view>
     </div>
     <div>   
       <router-link to='/home'>Home</router-link>
       <router-link to='/users/Test User'>Users</router-link>
-    </div>  
+    </div>
+    <router-view></router-view>  
   </div>
   
 </template>
