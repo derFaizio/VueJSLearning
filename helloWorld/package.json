@@ -2,7 +2,7 @@
   "name": "helloworld",
   "version": "1.0.0",
   "description": "Lesson 1: Getting Started",
-  "author": "Faizan Aslam <faizan.aslam@infineon.com>",
+  "author": "derFaizio <aslam.mfaizan@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
