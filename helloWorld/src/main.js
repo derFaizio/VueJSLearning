@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { store } from './store'
+import * as firebase from 'firebase'
+import firebaseDB from './firebaseConfig'
+
+import VueFire from 'vuefire';
+Vue.use(VueFire);
 
 Vue.config.productionTip = false
 
@@ -13,5 +18,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App }, 
 })

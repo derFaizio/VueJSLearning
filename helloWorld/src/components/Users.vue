@@ -11,6 +11,10 @@
                 <button class="destroy" @click="deleteUser(user)">X</button>
             </h3>
         </div>
+        <div>
+            <h3 v-for="greeting in greetings" :key="greeting.key" class="active"><a href="#">{{ greeting.text }}</a>
+            </h3>
+        </div>
         <button @click='goHome'>Go Home</button>
     </div>
 </template>
@@ -20,11 +24,18 @@ export default {
     computed: {
       myusers() {
           return this.$store.getters.users
+      },
+      greetings(){
+          return this.$store.getters.greetings
       }
   }, 
     data: () => ({ 
     newUser: ''
   }),
+    mounted() { 
+          console.log("Mounted method called!")
+          this.$store.dispatch("getInitialGreetings")
+    },
     methods:{
       goHome(){
         this.$router.push('/home');
@@ -37,8 +48,9 @@ export default {
           this.$store.dispatch('deleteUser', user)
       },
       showUser(){
-          console.log(JSON.stringify(this.$store.getters.users))
-      }
+          //console.log(JSON.stringify(this.$store.getters.users))
+          this.$store.dispatch("getInitialGreetings")
+      },
   },
   
 
