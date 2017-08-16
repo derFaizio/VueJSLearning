@@ -6,12 +6,12 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        users: [{
+        users: [/*{
             name: "Alice",
         }, 
         {
             name: "Bob"
-        }],
+        }*/],
         greetings: {}
     }, 
     getters:{
@@ -29,10 +29,21 @@ export const store = new Vuex.Store({
             return firebaseDB.ref('greetings').once('value').then(function(snapshot){
                 console.log("Initial Greetings: " + JSON.stringify(snapshot))
                 return state.greetings = Object.values(snapshot.val())
+            }).catch(function(err){
+                console.log("An error occured while connecting with the server." + err)
+            })
+        },
+        getInitialUsers(state){
+            return firebaseDB.ref('users').once('value').then(function(snapshot){
+                console.log("Initial Users: " + JSON.stringify(snapshot))
+                return state.users = Object.values(snapshot.val())
+            }).catch(function(err){
+                console.log("An error occured while connecting with the server." + err)
             })
         },
         addUser(state, user){
-            return state.users.push(user);
+            //return state.users.push(user);
+            return firebaseDB.ref('users').push(user)
         },
         deleteUser(state, user){
             return state.users.splice(state.users.indexOf(user), 1)
@@ -47,6 +58,9 @@ export const store = new Vuex.Store({
         },
         getInitialGreetings(context){
             context.commit('getInitialGreetings')
+        },
+        getInitialUsers(context){
+            context.commit('getInitialUsers')
         }
     }
 

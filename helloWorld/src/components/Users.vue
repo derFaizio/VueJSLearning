@@ -35,6 +35,7 @@ export default {
     mounted() { 
           console.log("Mounted method called!")
           this.$store.dispatch("getInitialGreetings")
+          this.$store.dispatch("getInitialUsers")
     },
     methods:{
       goHome(){
