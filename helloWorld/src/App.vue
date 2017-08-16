@@ -5,7 +5,7 @@
     </div>
     <div>   
       <router-link to='/home'>Home</router-link>
-      <router-link to='/users/Test User'>Users</router-link>
+      <router-link to='/users'>Users</router-link>
     </div>
     <router-view></router-view>  
   </div>

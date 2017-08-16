@@ -5,8 +5,9 @@
         <h2>List of Users</h2>
         <input type="text" v-model="newUser" @keyup.enter='addUser' placeholder="Add a new user">
         <button class="btn btn-info" @click='addUser'>Add</button>
+        <button class="btn btn-info" @click='showUser'>Show</button>
         <div>
-            <h3 v-for="user in users" class="active"><a href="#">{{ user.userName }}</a>
+            <h3 v-for="user in myusers" :key="user.name" class="active"><a href="#">{{ user.name }}</a>
                 <button class="destroy" @click="deleteUser(user)">X</button>
             </h3>
         </div>
@@ -16,13 +17,12 @@
 
 <script>
 export default {
-    data: () => ({
-    users: [{
-        userName: "Alice",
-    }, 
-    {
-        userName: "Bob"
-    }], 
+    computed: {
+      myusers() {
+          return this.$store.getters.users
+      }
+  }, 
+    data: () => ({ 
     newUser: ''
   }),
     methods:{
@@ -30,13 +30,17 @@ export default {
         this.$router.push('/home');
       },
       addUser(){
-        this.users.push({userName: this.newUser});
+        this.$store.dispatch('addUser', {name: this.newUser});
         this.newUser = ""
       },
       deleteUser(user){
-          this.users.splice(this.users.indexOf(user), 1)
+          this.$store.dispatch('deleteUser', user)
+      },
+      showUser(){
+          console.log(JSON.stringify(this.$store.getters.users))
       }
-  }
+  },
+  
 
 }
 </script>
